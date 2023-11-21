@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<Iuser, Userservices>();
+builder.Services.AddScoped<ITicketService, TicketService>();
 
 var app = builder.Build();
 

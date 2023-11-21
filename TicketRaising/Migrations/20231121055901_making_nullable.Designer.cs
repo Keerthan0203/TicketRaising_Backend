@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketRaising.Data;
 
@@ -11,9 +12,10 @@ using TicketRaising.Data;
 namespace TicketRaising.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231121055901_making_nullable")]
+    partial class making_nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +43,12 @@ namespace TicketRaising.Migrations
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TicketsId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("TicketId");
+                    b.HasIndex("TicketsId");
 
                     b.ToTable("Comments");
                 });
@@ -143,13 +148,13 @@ namespace TicketRaising.Migrations
 
             modelBuilder.Entity("TicketRaising.Models.Comment", b =>
                 {
-                    b.HasOne("TicketRaising.Models.Tickets", "Ticket")
+                    b.HasOne("TicketRaising.Models.Tickets", "Tickets")
                         .WithMany()
-                        .HasForeignKey("TicketId")
+                        .HasForeignKey("TicketsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ticket");
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("TicketRaising.Models.Tickets", b =>

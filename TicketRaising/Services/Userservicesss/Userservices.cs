@@ -30,6 +30,24 @@ namespace TicketRaising.Services.Userservicesss
 
             }
 
+        public async Task<bool> EmpLogin(Login emplogin)
+        {
+            var employeelogin = await _context.Employees.FirstOrDefaultAsync(p => p.Email == emplogin.email);
+
+            if (employeelogin == null)
+            {
+                return false;  // ("User with the provided email does not exist.");
+
+            }
+            if (!BCrypt.Net.BCrypt.Verify(emplogin.password, employeelogin.Password))
+            {
+                return false;  // Invalid password.
+            }
+
+            return true;  // Login successful.
+
+        }
+
         public async Task<bool> Register(UserRegisterRequest request)
         {
            //var password = request.Password;
@@ -55,5 +73,30 @@ namespace TicketRaising.Services.Userservicesss
             return true;
 
         }
+
+        public async Task<bool> EmpRegister(EmployeeRegisterRequest emprequest)
+        {
+            var empname = emprequest.Name;
+            if (_context.Users.Any(e => e.Email == emprequest.Email)) // Here We are checking whether the Employee already exists or not. If exists then we dont want to register again.
+            {
+                return false;
+            }
+            var emppassword = BCrypt.Net.BCrypt.HashPassword(emprequest.Password);
+
+            var employee = new Employee
+            {
+                Email= emprequest.Email, Name = empname, Password = emppassword
+            };
+
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            var users = await _context.Users.ToListAsync();
+            return users;
+        }
+
     }
 }

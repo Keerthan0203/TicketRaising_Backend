@@ -3,6 +3,8 @@ namespace TicketRaising.Data
 {
     public class DataContext : DbContext
     {
+        internal object Tickets;
+
         public DataContext(DbContextOptions<DataContext> options) : base(options) 
         {
             
@@ -16,5 +18,9 @@ namespace TicketRaising.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Tickets> Ticket { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }
