@@ -17,6 +17,8 @@ namespace TicketRaising.Data
 
         }
 
+        //gitpushtry
+
         public DbSet<User> Users { get; set; }
         public DbSet<Tickets> Ticket { get; set; }
         public DbSet<Employee> Employees { get; set; }
