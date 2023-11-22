@@ -25,20 +25,20 @@ namespace TicketRaising.Services.Userservicesss
                 return false;
             }
 
-            var employee = await _context.Employees.FindAsync(employeeId);
-            if (employee == null)
-            {
-                return false;
-            }
+          //  var employee = await _context.Employees.FindAsync(employeeId);
+            //if (employee == null)
+            //{
+            //    return false;
+            //}
 
             var newTicket = new Tickets
             {
                 TicketType = ticketType,
                 UserId = userId,
-                EmployeeId = employeeId,
+               // EmployeeId = employeeId,
                 Description = description,
                 CreatedBy = user.Name,
-                AssignedTo = employee.Name
+               // AssignedTo = employee.Name
 
                 
             };
@@ -54,5 +54,66 @@ namespace TicketRaising.Services.Userservicesss
             return ticketlist;
         }
 
+        public async Task<IEnumerable<Tickets>> GetUnassignedIssues()
+        {
+            var unassignedIssues = await _context.Ticket
+                .Where(ticket => ticket.EmployeeId == null) //Tickets with unassigned employee
+                .ToListAsync();
+            return unassignedIssues;
+
+        }
+        public async Task<bool> AssignTicketToSelf(int ticketId, int employeeId)
+        {
+            var ticket = await _context.Ticket.FindAsync(ticketId);
+            if (ticket == null)
+            {
+                return false; //Ticket Not Found
+            }
+            
+            // check if ticket is unassigned
+            if(ticket.EmployeeId !=null)
+            {
+                return false; // Ticket is already assigned 
+            }
+
+            var employee = await _context.Employees.FindAsync(employeeId); //Find the employee by employeeId
+            if(employee == null)
+            {
+                return false; //Employee not found
+            }
+
+
+            // Assign the ticket to the employee
+            ticket.EmployeeId = employeeId;
+            ticket.AssignedTo = employee.Name;
+            ticket.Status = TicketStatus.Processing;
+            ticket.UpdatedOn = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
+        public async Task<bool> ReassignTicket(int ticketId, int newEmployeeId)
+        {
+            var ticket = await _context.Ticket.FindAsync(ticketId);
+            if (ticket == null)
+            {
+                return false; // Ticket Not Found
+            }
+            // Check if new employee exist
+
+            var newEmployee = await _context.Employees.FindAsync(newEmployeeId);
+            if (newEmployee == null)
+            {
+                return false; // New employee not found
+            }
+            // Reassign the ticket to new employee
+            ticket.EmployeeId= newEmployeeId;
+            ticket.AssignedTo = newEmployee.Name;
+            ticket.UpdatedOn= DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

@@ -34,5 +34,36 @@ namespace TicketRaising.Controllers
 
             return Ok(ticketlist);
         }
+
+        [HttpGet("getunassignedIssues")]
+
+        public async Task<IActionResult> GetUnassignedIssues()
+        {
+            var unassignedIssues = await _ticketService.GetUnassignedIssues();
+            return Ok(unassignedIssues);
+        }
+
+        [HttpPost("AssignTicketToSelf")]
+        public async Task<IActionResult> AssignTicketToSelf(int ticketId, int employeeId)
+        {
+            var success = await _ticketService.AssignTicketToSelf(ticketId, employeeId);
+
+            if (success)
+            {
+                return Ok("Ticket assigned successfully");
+            }
+            return BadRequest("Unable to assign the ticket. Please check the inputs and try again.");
+        }
+
+        [HttpPost("Reassign_the_issue")]
+        public async Task<IActionResult> ReassignTicket(int ticketId, int newEmployeeId)
+        {
+            var success = await _ticketService.ReassignTicket(ticketId, newEmployeeId);
+            if (success)
+            {
+                return Ok("Ticket re-assigned");
+            }
+            return BadRequest("Unable to re-assign the ticket ");
+        }
     }
 }

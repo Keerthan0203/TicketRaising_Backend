@@ -10,7 +10,7 @@
         public User User { get; set; }
 
         // Foreign key property for Employee
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
 
         // Navigation property for the foreign key relationship with User
         public Employee Employee { get; set; }

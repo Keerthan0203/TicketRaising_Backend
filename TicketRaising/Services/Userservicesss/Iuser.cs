@@ -8,6 +8,6 @@
         Task<bool> EmpLogin(Login emplogin);
 
         Task<IEnumerable<User>> GetAllUsers();
-
+        
     }
 }
