@@ -1,0 +1,209 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Live Support</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">CATEGORIES</a></li>
+                    <li><a href="#">EXTRE PAGES</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html> -->
+<!-- *{
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
+}
+
+.navbar{
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+
+.logo{
+    color: #ff7200;
+    font-size: 30px;
+    font-family: Arial;
+    padding-left: 0;
+    float: left;
+    padding-top: 10px;
+}
+
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
+
+ul{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-family: Arial;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: #ff7200;
+}
+
+<section class="banner">
+    <div class="auto-box">
+        <div class="row">
+            <div class="left">
+
+            </div>
+            <div class="right">
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="page-title">
+    <div class="auto-box-clearfix">
+        <div class="row">
+            <h1 class="ticket">Ticket System</h1>
+        </div>
+    </div>
+</div>
+
+                                            <div id="ticketContainer">
+                                                <br>
+                                                <form id="frmCreateNewTicketGeuest"
+                                                    onsubmit="guestTicketSubmit(event, this);">
+                                                    <label for="yourName">Your Name</label>
+                                                    <br>
+                                                    <input type="tex<div class="main-box">
+    <div class="auto-main">
+        <div class="row">
+            <div class="left-content">
+                <div class="post">
+                    <p>
+                        WELCOME TO ISSUE RESOLVER.<br>Choose an ticket related to your issue which has to be solved.
+                    </p>
+                    <div class="support">
+                        <div class="tab-pane">
+                            <div id="create_ticket_counter">
+                                <div id="logincounter">
+                                    <ul class="nav_nav_tabs">
+                                        <li class="active">
+                                            <a href="#ticketContainer" onclick="getContactValues()">Create New
+                                                Ticket</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="FAQ_TAB">
+                                            <div class="faq_filter">
+                                                <div class="faq_item">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Category</td>
+                                                                <td>
+                                                                    <select id="fliter_by_faq_category_front">
+                                                                        <option value="all">All</option>
+                                                                        <option value="1">General</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="faq_search">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="text" placeholder="Search...">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="faq_container"></div>
+                                                <div class="wait">
+                                                    <img src="http://demo.mypsolution.com/wp9/wp-content/plugins/wp-support-plus-responsive-ticket-system/asset/images/ajax-loader@2x.gif?ver=8.0.0"
+                                                        alt="Please wait">
+                                                </div>
+                                            </div>t" id="yourName" class="wpsp_required"
+                                                        placeholder="Your Name*">
+                                                    <br>
+                                                    <br>
+                                                    <label for="emailAddress">Email Address</label>
+                                                    <br>
+                                                    <input type="text" id="emailAddress" placeholder="Subject*">
+                                                    <br><br>
+                                                    <label for="helpSubject">Type your Help Subject</label>
+                                                    <br>
+                                                    <textarea name="create_ticket_body" id="helpSubject" placeholder="Type your Help Subject"></textarea>
+                                                    <br><br>
+                                                    <div>
+                                                        <label for="ticketCategory">Category</label>
+                                                        <br>
+                                                        <select name="create_ticket_category" id="ticketCategory">
+                                                            <option value>Category</option>
+                                                            <option value="2">Edit account details</option>
+                                                            <option value="1">How to create items</option>
+                                                            <option value="3">Money Processing</option>
+                                                        </select>
+                                                        <br><br>
+                                                    </div>
+                                                    <input type="hidden" id="create_ticket_type" value="0">
+                                                    <label for="humanVerification">Are you human?</label>
+                                                    <br>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> -->
