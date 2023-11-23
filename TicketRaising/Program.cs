@@ -4,6 +4,7 @@ global using TicketRaising.Data;
 using TicketRaising.Services.Userservicesss;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 
@@ -14,8 +15,20 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<Iuser, Userservices>();
 builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "_myAllowSpecificOrigins",
+                      policy =>
+                      {
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyOrigin();
+                      });
+});
 
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

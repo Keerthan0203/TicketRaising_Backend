@@ -4,7 +4,7 @@ using TicketRaising.Services.Userservicesss;
 
 namespace TicketRaising.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {

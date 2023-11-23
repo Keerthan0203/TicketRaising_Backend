@@ -6,7 +6,10 @@
         Task<IEnumerable<Tickets>> GetAllTicketList();
 
         Task<IEnumerable<Tickets>> GetUnassignedIssues();
-        Task<bool> AssignTicketToSelf(int ticketId, int employeeId);
+        //Task<bool> AssignTicketToSelf(int ticketId, int employeeId);
+        Task<IEnumerable<Tickets>> GetOpenStatusTickets();
         Task<bool> ReassignTicket(int ticketId, int newEmployeeId);
+        Task<bool> MarkTicketAsResolved(int ticketId);
+        Task<bool> ResolveAndCloseTicket(int ticketId, string resolutionDetails);
     }
 }
