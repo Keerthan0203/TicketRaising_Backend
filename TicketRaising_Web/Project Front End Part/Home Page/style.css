@@ -351,3 +351,21 @@ img{
 .h4-content{
     color: #5bc0de;
 }
+
+.name-input{
+    margin-top: 10px;
+}
+
+.email-input{
+    margin-top: 10px;
+}
+
+.subject-input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.list-group-item:hover {
+    background-color: orange;
+    cursor: pointer;
+}
