@@ -26,6 +26,13 @@ const Authenticate = async () => {
     const email = document.getElementById('loginEmail')?.value;
     const password = document.getElementById('loginPassword')?.value;
     const url = `${baseUrl}/User/UserLogin`;
+
+    if (!email || !password) {
+        console.log("Please enter both email and password");
+        alert('Please enter both credentials');
+        return;
+    }
+
     const payload = {
         "email": email,
         "password": password
@@ -33,11 +40,54 @@ const Authenticate = async () => {
 
     try {
         debugger
-        const response = await axios.post(url, payload, { timeout: 10000 }); // Set timeout to 5 seconds
-        console.log(response.data);  // Access the response data
-        // Handle the response data or update UI here
+        
+        const response = await axios.post(url, payload);
+console.log(response);
+
+if (response.data) {
+    window.location.href = "createTicket.html";
+} else {
+    console.log("Authentication failed");
+     //showing an error message
+     alert('Username or password is incorrect. Please check the credentials and re-try. ');
+
+}
     } catch (err) {
         console.error(err);
         // Handle errors here
     }
+};
+
+const SignUp = async () => {
+    event.preventDefault();
+    debugger
+    const name = document.getElementById('login_Name')?.value;
+    const email = document.getElementById('login_Email')?.value;
+    const password = document.getElementById('login_Password')?.value;
+    const confirmPassword = document.getElementById('confirm_Password')?.value;
+
+    if(password !== confirmPassword)
+    {
+        alert('Password does not match. Please enter matching passwords');
+        return;
+    }
+    const url = `${baseUrl}/User/UserRegister`;
+    const payload = {
+        "name": name,
+        "email": email,
+        "password": password
+    };
+
+    try {
+        debugger
+        const response = await axios.post(url, payload); 
+        console.log(response.data);  // Access the response data
+        // Handle the response data or update UI here
+        alert('User registered successfully');
+    } catch (err) {
+        console.error(err);
+        // Handle errors here
+        alert('Registration failed. Please try again.');
+    }
+    
 };

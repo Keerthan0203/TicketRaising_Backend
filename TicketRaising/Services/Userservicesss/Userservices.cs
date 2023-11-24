@@ -59,7 +59,6 @@ namespace TicketRaising.Services.Userservicesss
             }
             var password = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-
             var user = new User
             {
                 Email = request.Email,

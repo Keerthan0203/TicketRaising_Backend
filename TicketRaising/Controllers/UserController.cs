@@ -44,7 +44,7 @@ namespace TicketRaising.Controllers
         [HttpGet("getallUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _userservices.GetAllUsers(); // Create a method in your service to get all users
+            var users = await _userservices.GetAllUsers(); // getting all users details
 
             //if (users == null )
             //{

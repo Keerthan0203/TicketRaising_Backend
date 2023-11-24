@@ -40,7 +40,6 @@ namespace TicketRaising.Services.Userservicesss
                 CreatedBy = user.Name,
                // AssignedTo = employee.Name
 
-                
             };
             _context.Ticket.Add(newTicket);
             

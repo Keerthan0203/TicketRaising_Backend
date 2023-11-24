@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TicketRaising.Services.Userservicesss;
 
 namespace TicketRaising.Controllers
@@ -22,6 +21,7 @@ namespace TicketRaising.Controllers
             return Ok(await _ticketService.CreateTicketWithTicketType(ticketType, userId, employeeId, description));
           
         }
+
         [HttpGet("getallTicketList")]
         public async Task<IActionResult> GetAllTicketList()
         {
