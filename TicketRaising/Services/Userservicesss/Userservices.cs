@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
+using TicketRaising.Dto;
+using TicketRaising.Models;
 
 namespace TicketRaising.Services.Userservicesss
 {
@@ -12,39 +14,57 @@ namespace TicketRaising.Services.Userservicesss
             _context = context;
         }
 
-        public async Task<bool> Login(Login login)
+        public async Task<userDetailsDto> Login(Login login)
         {
                 var User = await _context.Users.FirstOrDefaultAsync(p => p.Email == login.email);
 
                 if (User == null)
                 {
-                    return false;  // ("User with the provided email does not exist.");
-
-                }
-                if (!BCrypt.Net.BCrypt.Verify(login.password, User.Password))
-                {
-                    return false;  // Invalid password.
-                }
-
-                return true;  // Login successful.
+                return new userDetailsDto { Success = false, Message = "User with the provided email does not exist." };
 
             }
+                if (!BCrypt.Net.BCrypt.Verify(login.password, User.Password))
+                {
+                return new userDetailsDto { Success = false, Message = "Invalid password." };
+            }
 
-        public async Task<bool> EmpLogin(Login emplogin)
+                
+            return new userDetailsDto
+            {
+                Success = true,
+                Message = "Login successful.",
+                Id = User.Id,
+                Name = User.Name,
+                Email = User.Email
+            };
+        }
+
+    
+
+        public async Task<EmployeeDetailsDto> EmpLogin(Login emplogin)
         {
             var employeelogin = await _context.Employees.FirstOrDefaultAsync(p => p.Email == emplogin.email);
 
             if (employeelogin == null)
             {
-                return false;  // ("User with the provided email does not exist.");
+                return new EmployeeDetailsDto { Success = false, Message = "User with the provided email does not exist." };
 
             }
             if (!BCrypt.Net.BCrypt.Verify(emplogin.password, employeelogin.Password))
             {
-                return false;  // Invalid password.
-            }
+                return new EmployeeDetailsDto { Success = false, Message = "Invalid password." };
 
-            return true;  // Login successful.
+            }
+            return new EmployeeDetailsDto
+            {
+                Success = true,
+                Message = "Login successful.",
+                Id = employeelogin.Id,
+                Name = employeelogin.Name,
+                Email = employeelogin.Email
+            };
+
+
 
         }
 

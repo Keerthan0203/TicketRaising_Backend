@@ -1,4 +1,5 @@
 ﻿
+using System.Net.Sockets;
 using TicketRaising.Models;
 
 namespace TicketRaising.Services.Userservicesss
@@ -12,41 +13,68 @@ namespace TicketRaising.Services.Userservicesss
             _context = context;
         }
 
-        public async Task<bool> CreateTicketWithTicketType(TicketType ticketType, int userId, int employeeId, string description)
+        //public async Task<bool> CreateTicketWithTicketType(TicketTypes ticketType, int userId, int employeeId, string description)
+        //{
+        //    //if (!Enum.IsDefined(typeof(TicketType), ticketType))
+        //    //{
+        //    //    return false;
+        //    //}
+
+        //    var user = await _context.Users.FindAsync(userId);
+        //    if (user == null)
+        //    {
+        //        return false;
+        //    }
+
+        //  //  var employee = await _context.Employees.FindAsync(employeeId);
+        //    //if (employee == null)
+        //    //{
+        //    //    return false;
+        //    //}
+
+        //    var newTicket = new Tickets
+        //    {
+        //        TicketType = ticketType,
+        //        UserId = userId,
+        //       // EmployeeId = employeeId,
+        //        Description = description,
+        //        CreatedBy = user.Name,
+        //       // AssignedTo = employee.Name
+
+        //    };
+        //    _context.Ticket.Add(newTicket);
+
+        //    await _context.SaveChangesAsync();
+        //    return true;
+        //}
+        //// To view the list of all the issues logged
+        public async Task<bool> CreateTicketWithTicketType(string Types_Name, int userId,  string description)
         {
-            //if (!Enum.IsDefined(typeof(TicketType), ticketType))
-            //{
-            //    return false;
-            //}
+           
+                var user = await _context.Users.FindAsync(userId);
+                if (user == null)
+                {
+                    return false;
+                }
 
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-            {
-                return false;
-            }
-
-          //  var employee = await _context.Employees.FindAsync(employeeId);
-            //if (employee == null)
-            //{
-            //    return false;
-            //}
 
             var newTicket = new Tickets
             {
-                TicketType = ticketType,
                 UserId = userId,
-               // EmployeeId = employeeId,
+                TicketTypeId = (int)Enum.Parse<TicketTypes>(Types_Name),
                 Description = description,
                 CreatedBy = user.Name,
-               // AssignedTo = employee.Name
-
+                StatusId = 1
             };
-            _context.Ticket.Add(newTicket);
+
+                _context.Ticket.Add(newTicket);
+
+                await _context.SaveChangesAsync();
+                return true;
+           
             
-            await _context.SaveChangesAsync();
-            return true;
+
         }
-        // To view the list of all the issues logged
         public async Task<IEnumerable<Tickets>> GetAllTicketList()
         {
             var ticketlist = await _context.Ticket.ToListAsync();
@@ -96,9 +124,8 @@ namespace TicketRaising.Services.Userservicesss
         public async Task<IEnumerable<Tickets>> GetOpenStatusTickets()
         {
             var openStatusTickets = await _context.Ticket
-                .Where(ticket => ticket.Status == TicketStatus.Open || ticket.Status == TicketStatus.Processing)
-                .ToListAsync();
-
+         .Where(ticket => ticket.StatusId == (int)TicketStatus.Open || ticket.StatusId == (int)TicketStatus.Processing)
+         .ToListAsync();
             return openStatusTickets;
         }
 
@@ -134,7 +161,7 @@ namespace TicketRaising.Services.Userservicesss
             }
 
             //Change status as resolved 
-            ticket.Status = TicketStatus.Query_Resolved;
+            ticket.StatusId = (int)TicketStatus.Query_Resolved;
             ticket.UpdatedOn = DateTime.Now;
 
             await _context.SaveChangesAsync();
@@ -143,7 +170,7 @@ namespace TicketRaising.Services.Userservicesss
         public async Task<bool> ResolveAndCloseTicket(int ticketId, string resolutionDetails)
         {
             var ticket = await _context.Ticket.FindAsync(ticketId);
-            if(ticket == null || ticket.Status != TicketStatus.Query_Resolved )
+            if(ticket == null || ticket.StatusId != (int)TicketStatus.Query_Resolved )
             {
                 return false; //  Ticket not found or not in the resolved state
             }
@@ -151,7 +178,7 @@ namespace TicketRaising.Services.Userservicesss
             ticket.Description = resolutionDetails;
 
             // CLose the ticket
-            ticket.Status = TicketStatus.Ticket_Closed;
+            ticket.StatusId = (int)TicketStatus.Ticket_Closed;
             ticket.UpdatedOn = DateTime.Now;
 
             await _context.SaveChangesAsync();

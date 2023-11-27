@@ -12,8 +12,8 @@ using TicketRaising.Data;
 namespace TicketRaising.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231121055625_changedatatype")]
-    partial class changedatatype
+    [Migration("20231127201107_migrateerGFDFGHJndfn")]
+    partial class migrateerGFDFGHJndfn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,12 +43,9 @@ namespace TicketRaising.Migrations
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TicketsId");
+                    b.HasIndex("TicketId");
 
                     b.ToTable("Comments");
                 });
@@ -78,6 +75,45 @@ namespace TicketRaising.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("TicketRaising.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Status_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Status_Name = "Open"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Status_Name = "Processing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Status_Name = "Query_Resolved"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Status_Name = "Ticket_Closed"
+                        });
+                });
+
             modelBuilder.Entity("TicketRaising.Models.Tickets", b =>
                 {
                     b.Property<int>("Id")
@@ -87,11 +123,9 @@ namespace TicketRaising.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AssignedTo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -100,13 +134,13 @@ namespace TicketRaising.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketType")
+                    b.Property<int>("TicketTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedOn")
@@ -115,13 +149,59 @@ namespace TicketRaising.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int>("typesId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("StatusId");
+
                     b.HasIndex("UserId");
 
+                    b.HasIndex("typesId");
+
                     b.ToTable("Ticket");
+                });
+
+            modelBuilder.Entity("TicketRaising.Models.Types", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Types_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypesofTickets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Types_Name = "Finance_Issues"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Types_Name = "Technical_Issue"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Types_Name = "Laptop_Issue"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Types_Name = "Reimbursement_Issues"
+                        });
                 });
 
             modelBuilder.Entity("TicketRaising.Models.User", b =>
@@ -150,20 +230,24 @@ namespace TicketRaising.Migrations
 
             modelBuilder.Entity("TicketRaising.Models.Comment", b =>
                 {
-                    b.HasOne("TicketRaising.Models.Tickets", "Tickets")
+                    b.HasOne("TicketRaising.Models.Tickets", "Ticket")
                         .WithMany()
-                        .HasForeignKey("TicketsId")
+                        .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tickets");
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("TicketRaising.Models.Tickets", b =>
                 {
                     b.HasOne("TicketRaising.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeId")
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("TicketRaising.Models.Status", "status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -173,9 +257,19 @@ namespace TicketRaising.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TicketRaising.Models.Types", "types")
+                        .WithMany()
+                        .HasForeignKey("typesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Employee");
 
                     b.Navigation("User");
+
+                    b.Navigation("status");
+
+                    b.Navigation("types");
                 });
 #pragma warning restore 612, 618
         }

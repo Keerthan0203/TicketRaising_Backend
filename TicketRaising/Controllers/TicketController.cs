@@ -15,10 +15,10 @@ namespace TicketRaising.Controllers
         }
 
         [HttpPost("ChooseTicketType")]
-        public async Task<IActionResult> ChooseTicketType(TicketType ticketType, int userId, int employeeId, string description)
+        public async Task<IActionResult> ChooseTicketType(string Types_Name, int userId, string description)
         {
 
-            return Ok(await _ticketService.CreateTicketWithTicketType(ticketType, userId, employeeId, description));
+            return Ok(await _ticketService.CreateTicketWithTicketType(Types_Name, userId,  description));
           
         }
 

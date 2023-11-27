@@ -1,4 +1,6 @@
-﻿namespace TicketRaising.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TicketRaising.Models
 {
     public class Tickets
     {
@@ -14,11 +16,13 @@
 
         // Navigation property for the foreign key relationship with User
         public Employee Employee { get; set; }
-
-        public TicketType TicketType { get; set; }
-
-        //Enaum
-        public TicketStatus Status { get; set; }
+        [ForeignKey("Types")]
+        public int TicketTypeId { get; set; }
+        // Navigation property for the foreign key relationship with Types
+        public Types Types { get; set; }
+        [ForeignKey("Status")]
+        public int StatusId { get; set; }
+        public  Status status { get; set; }
 
         public string? Description { get; set; }
         public string? CreatedBy { get; set; }
@@ -28,18 +32,6 @@
       
 
     }
-    public enum TicketStatus 
-    {
-        Open,
-        Processing,
-        Query_Resolved,
-        Ticket_Closed
-    }
-    public enum TicketType
-    {
-        Finance_Issues,
-        Technical_Issue,
-        Laptop_Issue,
-        Reimbursement_Issues
-    }
+
+
 }

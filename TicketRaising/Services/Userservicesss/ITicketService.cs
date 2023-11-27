@@ -2,7 +2,7 @@
 {
     public interface ITicketService
     {
-        Task<bool> CreateTicketWithTicketType(TicketType ticketType, int userId, int employeeId, string description);
+        Task<bool> CreateTicketWithTicketType(string Types_Name, int userId, string description);
         Task<IEnumerable<Tickets>> GetAllTicketList();
 
         Task<IEnumerable<Tickets>> GetUnassignedIssues();
