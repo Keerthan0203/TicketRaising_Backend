@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Sockets;
+using TicketRaising.Dto;
 using TicketRaising.Models;
 
 namespace TicketRaising.Services.Userservicesss
@@ -71,14 +73,25 @@ namespace TicketRaising.Services.Userservicesss
 
                 await _context.SaveChangesAsync();
                 return true;
-           
-            
-
         }
-        public async Task<IEnumerable<Tickets>> GetAllTicketList()
+
+        public async Task<IEnumerable<GetAllTicketsDto>> GetAllTicketList()
         {
-            var ticketlist = await _context.Ticket.ToListAsync();
-            return ticketlist;
+            var tickets = await _context.Ticket.ToListAsync();
+            var ticketDtos = tickets.Select(ticket => new GetAllTicketsDto()
+            {
+                Id = ticket.Id,
+                UserId = ticket.UserId,
+                EmployeeId = ticket.EmployeeId,
+                TicketTypeId = ticket.TicketTypeId,
+                StatusId = ticket.StatusId,
+                Description = ticket.Description,
+                CreatedBy = ticket.CreatedBy,
+                AssignedTo = ticket.AssignedTo,
+                Success = true,
+                Message = "Data retrieved successfully"
+            });
+            return ticketDtos;
         }
 
         public async Task<IEnumerable<Tickets>> GetUnassignedIssues()
