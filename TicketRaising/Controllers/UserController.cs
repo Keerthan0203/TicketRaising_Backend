@@ -7,9 +7,9 @@ namespace TicketRaising.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly Iuser _userservices;
+        private readonly IUserService _userservices;
 
-        public UserController(Iuser userservices)
+        public UserController(IUserService userservices)
         {
             _userservices = userservices;
         }

@@ -2,7 +2,7 @@
 
 namespace TicketRaising.Services.Userservicesss
 {
-    public interface Iuser
+    public interface IUserService
     {
         Task<bool> Register(UserRegisterRequest request);
         Task<userDetailsDto> Login(Login login);
