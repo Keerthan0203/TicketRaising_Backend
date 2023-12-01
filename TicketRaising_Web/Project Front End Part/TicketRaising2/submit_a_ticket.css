@@ -1,0 +1,137 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+/* .parent .leftpart {
+    left: 0;
+}
+
+.parent .rightpart {
+    right: 0;
+}
+
+.parent .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+} */
+
+.create-ticket h3 {
+    font-family: cursive;
+    color: #2C1C5F;
+    text-decoration: underline;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h3 {
+    text-align: center;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+    justify-content: center;
+    padding-left: 200px;
+    padding-right: 100px;
+    /* justify-content: right;
+    text-align: left; */
+}
+
+.form-label {
+    color: #5E548E;
+    /* Blue */
+    font-weight: 500;
+    /* text-align: right;
+    justify-content: right; */
+    /* width: 50%; */
+}
+.create-ticket{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+#subject {
+    padding-top: 15px;
+}
+
+button.btn-primary {
+    background-color: #7e679d;
+    color: #ffffff;
+    border: 1px solid white;
+}
+
+button.btn-primary:hover {
+    background-color: #2C1C5F;
+    color: #ffffff;
+    border: 1px solid white;
+}
+
+button.btn-secondary {
+    background-color: #7e679d;
+    color: #ffffff;
+    border: 1px solid white;
+}
+
+button.btn-secondary:hover {
+    background-color: #2C1C5F;
+    color: #ffffff;
+    border: 1px solid white;
+}
+
+/* navbar */
+#navbar {
+    background-color: #E0B1CB;
+}
+
+#logo img {
+    border-radius: 10px;
+    width: 160px;
+    margin-left: 40px;
+}
+
+.navbar-nav {
+    margin-left: 50px;
+}
+
+.nav-item .nav-link {
+    color: #5E548E;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.nav-item .nav-link:hover {
+    background: #f7f5f2;
+    border-radius: 5px;
+}
+
+.nav-item button {
+    background: #7e679d;
+    color: white;
+    border: 1px solid white;
+    margin-left: 30px;
+}
+
+.nav-item button:hover {
+    background: #2C1C5F;
+    color: white;
+    /* border: 1px solid white; */
+    margin-left: 30px;
+}
+.submiticket{
+    margin: auto;
+    padding-bottom: 20px;
+    font-family: cursive;
+}
+

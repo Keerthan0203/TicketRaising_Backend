@@ -1,0 +1,117 @@
+#navbar{
+    background-color: #E0B1CB;
+}
+#logo img{
+    border-radius: 10px;
+    width: 160px;
+    margin-left: 40px;
+}
+.navbar-nav{
+    margin-left: 50px;
+}
+.nav-item .nav-link{
+    color: #5E548E;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+.nav-item .nav-link:hover{
+    background: #f7f5f2;
+    border-radius: 5px;
+}
+.nav-item button{
+    background: #7e679d;
+    color: white;
+    border: 1px solid white;
+    margin-left: 30px;
+}
+.nav-item button:hover{
+    background: #2C1C5F;
+    color: white;
+    /* border: 1px solid white; */
+    margin-left: 30px;
+}
+#profile-image {
+    width: 40px; /* Adjust the width of the profile image */
+    height: 40px; /* Adjust the height of the profile image */
+    border-radius: 50%; /* Make the image round */
+    margin-right: 10px; /* Add some spacing between image and username */
+}
+
+#username {
+    color: #2C1C5F; /* Adjust the color of the username */
+    font-size: 16px; /* Adjust the font size of the username */
+    font-weight: bold; /* Make the username bold */
+}   
+
+/* navbar end */
+
+
+
+.container {
+    text-align: center;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.issue {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+}
+
+/* your issue card */
+body {
+    background: url('../images/Main\ page\ image.jpg') center center fixed; /* Replace 'your-image-path.jpg' with your actual image path */
+    background-size: cover;
+    /* /* height: 100vh; Ensure the background covers the whole viewport
+    margin: 0; Remove default margin */
+    /* overflow: hidden; */
+}
+
+/* .card{
+    background-color: #b2744c !important;
+} */
+.card .card-body{
+    background-color: #E0B1CB;
+    /* border: 1px solid white;
+    border-radius: 5px; */
+    color: #5E548E;
+}
+.card-custom .card-body{
+    padding-left: 40px;
+}
+.card-custom {
+    max-width: 500px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the card */
+    height: 20vh;
+   
+}
+/* .card-title-underline {
+    text-decoration: underline;
+    background-color: #5E548E;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+} */
+#addCommentBtn{
+    background-color: #7e679d;
+    color: white;
+    border: white;
+}
+.all-content h2{
+    color: white;
+    text-decoration: underline;
+}
+.allign{
+    display: flex; 
+    justify-content: space-between;
+}
+
+

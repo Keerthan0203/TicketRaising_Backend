@@ -8,6 +8,7 @@ namespace TicketRaising.Services.Userservicesss
         //Task<IEnumerable<Tickets>> GetAllTicketList();
 
         Task<IEnumerable<GetAllTicketsDto>>GetAllTicketList();
+        Task<IEnumerable<GetAllTicketsDto>> GetAllTicketsByUserId(int userId);
 
         Task<IEnumerable<Tickets>> GetUnassignedIssues();
         //Task<bool> AssignTicketToSelf(int ticketId, int employeeId);  

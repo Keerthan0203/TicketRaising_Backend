@@ -5,7 +5,7 @@ using TicketRaising.Models;
 
 namespace TicketRaising.Services.Userservicesss
 {
-    public class Userservices : Iuser
+    public class Userservices : IUserService
     {
         private readonly DataContext _context;
 
