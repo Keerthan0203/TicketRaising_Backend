@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<IUserService, Userservices>();
+builder.Services.AddScoped<IUserService,Userservices>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddCors(options =>
 {
