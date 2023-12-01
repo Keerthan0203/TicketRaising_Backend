@@ -1,0 +1,28 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h3{
+    text-align: center;
+}
+
+form{
+    display: block;
+    margin-top: 0em;
+    justify-content: center;
+    padding-left: 700px;
+    padding-right: 100px;
+}
+
+#subject{
+    padding-top: 15px;
+}

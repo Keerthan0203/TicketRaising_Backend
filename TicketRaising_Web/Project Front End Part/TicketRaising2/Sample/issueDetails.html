@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Details</title>
+    <link rel="stylesheet" href="./issueDetails.css">
+</head>
+<body>
+    <h2>Issue Details</h2>
+    <form id="issueForm">
+        <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="input-group">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="open">Open</option>
+                <option value="inProgress">In Progress</option>
+                <option value="resolved">Resolved</option>
+                <option value="closed">Closed</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments"></textarea>
+        </div>
+        <button type="button" onclick="updateIssue()">Update</button>
+    </form>
+    <script src="./issueDetails.js"></script>
+</body>
+</html>
