@@ -33,6 +33,19 @@ namespace TicketRaising.Controllers
             return Ok(allTickets);
         }
 
+        [HttpGet("getTicketsByUserId/{userId}")]
+        public async Task<IActionResult> GetTicketsByUserId(int userId)
+        {
+            var userTickets = await _ticketService.GetAllTicketsByUserId(userId);
+
+            if (userTickets == null)
+            {
+                return NotFound("No tickets found for the specified user");
+            }
+
+            return Ok(userTickets);
+        }
+
         [HttpGet("getunassignedIssues")]
 
         public async Task<IActionResult> GetUnassignedIssues()

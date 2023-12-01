@@ -94,6 +94,29 @@ namespace TicketRaising.Services.Userservicesss
             return ticketDtos;
         }
 
+        public async Task<IEnumerable<GetAllTicketsDto>> GetAllTicketsByUserId(int userId)
+        {
+            var tickets = await _context.Ticket
+                .Where(ticket => ticket.UserId == userId)
+                .ToListAsync();
+
+            var ticketDtos = tickets.Select(ticket => new GetAllTicketsDto()
+            {
+                Id = ticket.Id,
+                UserId = ticket.UserId,
+                EmployeeId = ticket.EmployeeId,
+                TicketTypeId = ticket.TicketTypeId,
+                StatusId = ticket.StatusId,
+                Description = ticket.Description,
+                CreatedBy = ticket.CreatedBy,
+                AssignedTo = ticket.AssignedTo,
+                Success = true,
+                Message = "Data retrieved successfully"
+            });
+
+            return ticketDtos;
+        }
+
         public async Task<IEnumerable<Tickets>> GetUnassignedIssues()
         {
             var unassignedIssues = await _context.Ticket
