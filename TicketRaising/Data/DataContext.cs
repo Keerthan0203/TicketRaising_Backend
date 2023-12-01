@@ -13,7 +13,7 @@ namespace TicketRaising.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CarssRecord;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
-            optionsBuilder.UseSqlServer("Server=KRUDRARADHYA01\\SQLEXPRESS;Database=Ticket_Raising;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=BRAVISHANKAR01\\SQLEXPRESS;Database=Ticket_Raising;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
 
         }
 

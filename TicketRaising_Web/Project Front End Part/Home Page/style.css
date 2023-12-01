@@ -5,6 +5,7 @@
     outline: none;
     box-sizing: border-box;
 }
+
 #checking{
     width: 1200px;
     height: 75px;
@@ -38,6 +39,9 @@
 .nav-link{
     text-decoration: none;
     color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
     font-family: Arial;
     font-weight: bold;
     transition: 0.4s ease-in-out;
@@ -84,6 +88,12 @@ h1{
     color: #233145;
     border-bottom: 1px solid #d7e4ec;
 }
+
+.body{
+    
+    background-color: #C2FBFF;
+}
+
 .left-content{
     position: relative;
     width: 70%;
@@ -92,6 +102,7 @@ h1{
     float: left;
     padding-bottom: 80px;
 }
+
 .main-box{
     background: #ffffff;
 }
@@ -110,8 +121,16 @@ h1{
     margin-bottom: 80px;
 }
 
-p{
-    margin: 0 0 10px;
+.para{
+    margin: 0px 0 10px;
+    padding-top: 100px;
+    margin-left: 50px;
+    margin-bottom: 0px;
+    font-size: 25px;
+}
+
+#menu-bar{
+    padding: 0px;
 }
 
 .support{
@@ -196,11 +215,10 @@ select{
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    color: #5a7182;
+    background-color: #C2FBFF;
     -webkit-font-smoothing: antialiased;
     line-height: 1.6em;
     font-weight: 300;
-    background: #f1faff;
 }
 
 form{
@@ -262,10 +280,12 @@ textarea{
 .pagefooter img:hover {
     transform: scale(1.2);
 }
+
 .formregion{
     display:grid;
     grid-template-columns: 2fr 1fr;
 }
+
 .formforinput{
     grid-row:1/3;
     padding: 13px 15px;
@@ -274,19 +294,21 @@ textarea{
 form{
     padding: 13px 15px;
 }
+
 .card{
     margin: 30px 10px;
 }
+
 .col{
     padding:0px 30px;
     margin: 0px 40px;
 }
 
 .copyrightsession{
+    background-color:rgb(1, 1, 50);
+    color: beige;
     padding:40px;
     text-align: center;
-    background-color: #5bc0de;
-    color: #233145;
 }
 
 .feeds{
@@ -306,14 +328,18 @@ form{
 .logosup{
     background-color:black;
 }
+
 .sidelist{
     margin:10px 50px;
     font-weight: 200;
     font-size: 1.5rem;
 }
-h1{
-    background-color:wheat;
+
+.ticket-system{
+    background-color: #020250;
+    color: beige;
     padding: 50px;
+    
 }
 
 img{
@@ -346,15 +372,16 @@ img{
 
 .check-box{
     width: 50px;
+    font-size: 25px;
 }
 
 .h4-content{
     color: #5bc0de;
 }
 
-.name-input{
+/* .name-input{
     margin-top: 10px;
-}
+} */
 
 .email-input{
     margin-top: 10px;
@@ -368,4 +395,13 @@ img{
 .list-group-item:hover {
     background-color: orange;
     cursor: pointer;
+}
+
+.container-fluid{
+    /* background-color:#7785AC; */
+    background-color: #8294C4;
+}
+
+.form-control me-2{
+    width: 100px;
 }
