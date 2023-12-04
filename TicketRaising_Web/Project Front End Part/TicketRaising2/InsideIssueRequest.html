@@ -6,7 +6,7 @@
    
     <link rel="stylesheet" type="text/css" href="InsideIssueRequest.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="InsideIssueRequest.js"></script>
+    <script src="script.js"></script>
       <!-- Bootstrap links -->
      
 </head>
@@ -28,9 +28,6 @@
                 <label for="issue-type" class="issue-type">Issue Type:</label>
                 <input type="text" id="issueType" class="input-form" name="issueType" placeholder="" disabled>
 
-                <label for="priority" class="priority">Priority:</label>
-                <input type="text" id="priority" class="input-form" name="priority" placeholder="" disabled>
-
                 <label for="description" class="description">Description:</label>
                 <textarea id="description" cols="35" rows="5" class="input-form" name="description"
                 placeholder="" disabled></textarea>
@@ -47,7 +44,7 @@
         </div>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                loadingData123();
+                loadingDataInsideIssue();
             });
         </script>
    

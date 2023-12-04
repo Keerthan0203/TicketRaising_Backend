@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="dashboard.css">
     <script async="true" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="dashboard.js"></script>
-    
 
-     <!-- Bootstrap links -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
@@ -21,8 +21,6 @@
         <div class="container">
 
             <!-- navbar start-->
-
-
             <nav class="navbar navbar-expand-lg" id="navbar">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#" id="logo"><img src="./images/Logo_prev_ui.png" alt=""></a>
@@ -51,74 +49,58 @@
 
                             </div>
                         </div>
-                        <!-- <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form> -->
                     </div>
                 </div>
             </nav>
         </div>
 
-            <!-- navbar ends -->
+        <!-- navbar ends -->
 
-            <section class="card--container">
-                <h3 class="main--title">Complete Data</h3>
-                <div class="card--wrapper">
+        <section class="card--container">
+            <h3 class="main--title">Complete Data</h3>
+            <div class="card--wrapper">
 
-                    <div class="task--board light-purple" onclick="redirectiontoassigned()">
-                        <div class="card--header">
-                            <div class="tasks">
-                                <span class="assigned-tasks">
-                                    Assigned Tasks
-                                </span><br><br>
-                                <span class="assigned value">
+                <div class="task--board light-purple" onclick="redirectiontoassigned()">
+                    <div class="card--header">
+                        <div class="tasks">
+                            <span class="assigned-tasks">
+                                Assigned Tasks
+                            </span><br><br>
+                            <span class="assigned value">
 
-                                </span>
-                            </div>
+                            </span>
                         </div>
-                    </div>
-
-                    <div class="task--board light-purple" onclick="redirectiontounassinged()">
-                        <div class="card--header">
-                            <div class="tasks">
-                                <span class="assigned-tasks">
-                                    Unassigned Tasks
-                                </span><br><br>
-                                <span class="assigned value">
-
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="task--board light-green">
-                        <div class="card--header">
-                            <div class="tasks">
-                                <span class="assigned-tasks">
-                                    Completed Tasks
-                                </span><br><br>
-                                <span class="assigned value">
-
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="task--board light-blue">
-                <div class="card--header">
-                    <div class="tasks">
-                        <span class="assigned-tasks">
-                            Total Tasks
-                        </span><br><br>
-                        <span class="assigned value">
-                            
-                        </span>
                     </div>
                 </div>
-            </div> -->
+
+                <div class="task--board light-purple" onclick="redirectiontounassinged()">
+                    <div class="card--header">
+                        <div class="tasks">
+                            <span class="assigned-tasks">
+                                Unassigned Tasks
+                            </span><br><br>
+                            <span class="assigned value">
+
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </section>
-            <section>
-                <div>
+                <div class="task--board light-green">
+                    <div class="card--header">
+                        <div class="tasks">
+                            <span class="assigned-tasks">
+                                Completed Tasks
+                            </span><br><br>
+                            <span class="assigned value">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div>
                 <div class="tabular--wrapper">
                     <h3 class="main--title">Total Tasks </h3>
                     <div class="table-container" id="TotalTask">
@@ -142,14 +124,13 @@
                     </div>
                 </div>
             </div>
-            </section>
-        </div>
-    
+        </section>
+    </div>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             getTotalIssue();
-            // postdata();
         });
     </script>
 </body>

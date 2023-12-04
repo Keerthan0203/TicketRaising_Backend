@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-*{
+* {
     margin: 0;
     padding: 0;
     border: none;
@@ -12,14 +12,15 @@
 /* body{
     display: flex;
 } */
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: nowrap;
     width: 100%;
 }
-.card--container{
+
+.card--container {
     display: flex;
     flex-direction: column;
     background: #fff;
@@ -30,7 +31,7 @@
     /* align-items: center; */
 }
 
-.card--wrapper{
+.card--wrapper {
     display: flex;
     flex-wrap: nowrap;
     gap: 1rem;
@@ -41,7 +42,7 @@
 
 }
 
-.main--title{
+.main--title {
     color: rgba(113, 99, 186, 255);
     /* padding-bottom: 110px; */
     font-size: 35px;
@@ -50,7 +51,7 @@
     margin-bottom: 5%;
 }
 
-.task--board{
+.task--board {
     background: rgb(229, 223, 223);
     border-radius: 10px;
     padding: 1.2rem;
@@ -62,114 +63,94 @@
     transition: all 0.5s ease-in-out;
 }
 
-.task--board:hover{
+.task--board:hover {
     transform: translateY(-5px);
 }
 
-.card--header{
+.card--header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.tasks{
+.tasks {
     display: flex;
     flex-direction: column;
 }
 
-.assigned-tasks{
+.assigned-tasks {
     font-size: 25px;
     font-weight: 600;
 }
 
-.assigned-value{
+.assigned-value {
     font-size: 24px;
     font-family: "Courier New", 'Courier New', Courier, monospace;
     font-weight: 600;
 }
 
-.light-red{
+.light-red {
     background: rgb(167, 95, 95);
 }
 
-.light-purple{
+.light-purple {
     background: rgb(167, 95, 159);
 }
 
-.light-green{
+.light-green {
     background: rgb(52, 141, 52);
 }
 
 
-.light-blue{
+.light-blue {
     background: rgb(48, 48, 141);
 }
 
-.tabular--wrapper{
+.tabular--wrapper {
     background: #fff;
     margin-top: 1rem;
     border-radius: 10px;
     padding: 2rem;
 }
 
-.table-container{
+.table-container {
     width: 100%;
 }
 
-table{
+table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 2%;
 }
 
-thead{
+thead {
     background: rgba(113, 99, 186, 255);
     color: #fff;
 }
 
-th{
+th {
     padding: 15px;
     text-align: center;
 }
 
-tbody{
+tbody {
     background: #f2f2f2;
 }
 
-td{
+td {
     padding: 15px;
     font-size: 14px;
     color: #333;
     border: 1px solid #dddddd;
     text-align: center;
-    display:inline-flexbox;
+    display: inline-flexbox;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
     background: #fff;
-    
-}
 
-/* tfoot{
-    background: rgba(113, 99, 186, 255);
-    font-weight: bold;
-    color: #fff;
 }
-
-tfoot td{
-    padding: 15px;
-} */
-/* #TicketHistory th, #TicketHistory td {
-    border: 20px solid #dddddd;
-    padding: 200    px;
-    text-align: center;
-   
-} */
-/* #TotalTask table {
-    width: 100%;
-    border-collapse: collapse;
-} */
 
 #TotalTask th,
 #TotalTask td {
@@ -178,22 +159,6 @@ tfoot td{
     text-align: center;
 }
 
-/* #TotalTask th {
-    background-color: #6786C1;
-    color: white;
-}
-
-#TotalTask tbody {
-    background-color: #f2f2f2;
-} */
-
-/* #TotalTask tr:nth-child(even) {
-    background-color: #ffffff;
-} */
-/* .container {
-    max-width: 1435px;
-} */
 .navbar {
-    max-width: 100%; /* Adjust as needed */
- /* Center the navbar within the container */
+    max-width: 100%;
 }

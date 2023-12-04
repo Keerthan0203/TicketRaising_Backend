@@ -1,11 +1,3 @@
-// document.getElementById('submitIssueBtn').addEventListener('click', function() {
-//     window.location.href = 'submit_a_ticket.html'; // Replace with the actual target page URL
-// });
-
-// const { default: axios } = require("axios");
-
-//const { default: axios } = require("axios");
-
 var x = document.getElementById("login");
 var y = document.getElementById("register");
 var z = document.getElementById("btn");
@@ -96,6 +88,7 @@ const SignUp = async () => {
         console.log(response.data);  // Access the response data
         // Handle the response data or update UI here
         alert('User registered successfully');
+        window.location.href = "Login_signup.html";
     } catch (err) {
         console.error(err);
         // Handle errors here
@@ -155,9 +148,6 @@ function redirectToYourRequestPage() {
     window.location.href = 'UserRequest.html';
 }
 
-function redirectToHomePage() {
-    window.location.href = 'index.html';
-}
 function getvalue() {
     const name = sessionStorage.getItem('userName');
     document.getElementById('subject').placeholder = name;
@@ -193,13 +183,6 @@ async function getmyIssue(){
             const ticket=responseData[i];
             console.log("CheckingIssues ", ticket);
             console.log("CheckingIssues",responseData);
-            // var div = document.createElement('div');
-            // var targetElement=document.getElementById('TicketHistory');
-           
-           // row.addEventListener("click", () => handleClickfortotaltask(ticket.id));
-
-            // div.className = 'card card-custom';
-            // var targetElement=document.getElementById("TicketHistory");
             const row = document.createElement('tr');
            
             row.innerHTML=`
@@ -230,27 +213,6 @@ async function handleClick(element){
 
 }
 
-
-
-
-// Function to fetch user-specific tickets
-// async function fetchUserTickets(userId) {
-//     const url = `${baseUrl}/Ticket/getAllTickets`;
-
-//     try {
-//         const response = await axios.get(url);
-//         return response.data;
-//     } catch (error) {
-//         console.error(error);
-//         return [];
-//     }
-// }
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
    
     // Update the profile information with the stored name
@@ -260,47 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     });
   
-
-    // Yourrrrrrrr Requestssssssssssss
-    // document.addEventListener("DOMContentLoaded", async function () {
-    //     const issueRaisedElement = document.querySelector(".card-title.card-title-underline + p.card-text");
-        
-    //     // Add this block to fetch and display user-specific tickets
-    //     const userId = sessionStorage.getItem('userId');
-    //     const userTickets = await fetchUserTickets(userId);
-    
-    //     if (userTickets.length > 0) {
-    //         let userIssuesHtml = "";
-    
-    //         for (ticket of userTickets) {
-    //             userIssuesHtml += `
-    //                 <div class="user-issue">
-    //                     <h6>Ticket ID: ${ticket.Id}</h6>
-    //                     <p>${ticket.Description}</p>
-    //                 </div>
-    //             `;
-    //         }
-    
-    //         issueRaisedElement.innerHTML = userIssuesHtml;
-    //     } else {
-    //         issueRaisedElement.textContent = "No issues found for the user.";
-    //     }
-    // });
-
-
-
-
-    // commentCount && commentCount.addEventListener("click", function () {
-    //     // Toggle the visibility of the comments section
-    //     commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
-    // });
-
-    // function updateCommentCount() {
-    //     commentCount.textContent = comments === 1 ? "1 comment" : `${comments} comments`;
-    //     commentsSection.innerHTML = comments > 0 ? commentsSection.innerHTML : "0 comments";
-    // }
-// });
-
 
 function redirectToHomePage() {
     window.location.href = 'HomePage.html';
@@ -313,42 +234,17 @@ async function Logout() {
     window.location.href = "Login_signup.html"
 }
 
-
-// Inside Issue Request
-
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     // Get the ticket ID from the URL parameters
-        //     const urlParams = new URLSearchParams(window.location.search);
-        //     const ticketId = urlParams.get('id');
-
-        //     // Fetch ticket details using the ticket ID
-        //     // Replace this with your actual API endpoint for fetching ticket details
-        //     fetchTicketDetails(ticketId);
-        // });
-
-        // // Function to fetch ticket details and fill the form
-        // function fetchTicketDetails(ticketId) {
-        //     // Replace this URL with your actual API endpoint for fetching ticket details
-        //     const apiUrl = `${baseUrl}/Ticket/getTicketById/{ticketId}`;
-
-        //     fetch(apiUrl)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             // Fill the form with the retrieved ticket details using innerHTML
-        //             document.getElementById('ticketID').value = data.id;
-        //             document.getElementById('name').value = data.createdBy;
-        //             document.getElementById('issueType').value = data.ticketTypeId;
-        //             document.getElementById('priority').value = 'Low'; // You can set priority based on your logic
-        //             document.getElementById('description').innerHTML = data.description;
-        //         })
-        //         .catch(error => {
-        //             console.error("Error fetching ticket details", error);
-        //         });
-        // }
-
-     
-    
-        // document.getElementById('assignedTasksButton').addEventListener('click', function() {
-        //     window.alocation.href = 'assignedTasks.html';
-        // });
-
+    async function loadingDataInsideIssue(){
+        
+            var ticketId=sessionStorage.getItem('Ticket_id');
+            console.log("Tickets",ticketId);
+            const url=`https://localhost:7249/Ticket/getTicketById/${ticketId}`;
+            const response=await axios.get(url);
+            console.log(response.data);
+            const responseData=response.data;
+            document.getElementById('ticketID').placeholder = responseData.id;
+            document.getElementById('name').placeholder = responseData.createdBy;
+            document.getElementById('issueType').placeholder = responseData.ticketTypeId;
+            document.getElementById('description').placeholder = responseData.description;
+            document.getElementById('commentsHistory').placeholder = responseData.employeeComments;    
+    }
