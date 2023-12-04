@@ -1,4 +1,4 @@
-// Login signup
+    // Login signup
 
 var x = document.getElementById("login");
 var y = document.getElementById("register");

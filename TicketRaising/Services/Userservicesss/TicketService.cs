@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Sockets;
 using TicketRaising.Dto;
 using TicketRaising.Models;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace TicketRaising.Services.Userservicesss
 {
@@ -15,41 +18,6 @@ namespace TicketRaising.Services.Userservicesss
             _context = context;
         }
 
-        //public async Task<bool> CreateTicketWithTicketType(TicketTypes ticketType, int userId, int employeeId, string description)
-        //{
-        //    //if (!Enum.IsDefined(typeof(TicketType), ticketType))
-        //    //{
-        //    //    return false;
-        //    //}
-
-        //    var user = await _context.Users.FindAsync(userId);
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
-
-        //  //  var employee = await _context.Employees.FindAsync(employeeId);
-        //    //if (employee == null)
-        //    //{
-        //    //    return false;
-        //    //}
-
-        //    var newTicket = new Tickets
-        //    {
-        //        TicketType = ticketType,
-        //        UserId = userId,
-        //       // EmployeeId = employeeId,
-        //        Description = description,
-        //        CreatedBy = user.Name,
-        //       // AssignedTo = employee.Name
-
-        //    };
-        //    _context.Ticket.Add(newTicket);
-
-        //    await _context.SaveChangesAsync();
-        //    return true;
-        //}
-        //// To view the list of all the issues logged
         public async Task<bool> CreateTicketWithTicketType(string Types_Name, int userId,  string description)
         {
            
@@ -58,7 +26,6 @@ namespace TicketRaising.Services.Userservicesss
                 {
                     return false;
                 }
-
 
             var newTicket = new Tickets
             {
@@ -117,6 +84,33 @@ namespace TicketRaising.Services.Userservicesss
             return ticketDtos;
         }
 
+        public async Task<GetAllTicketsDto> GetAllTicketsByTicketId(int ticketId)
+        {
+            var ticket = await _context.Ticket.FirstOrDefaultAsync(t => t.Id == ticketId);
+
+            if (ticket == null)
+            {
+                return null; // Or handle as needed (throw exception, return a default DTO, etc.)
+            }
+
+            var ticketDto = new GetAllTicketsDto()
+            {
+                Id = ticket.Id,
+                UserId = ticket.UserId,
+                EmployeeId = ticket.EmployeeId,
+                TicketTypeId = ticket.TicketTypeId,
+                StatusId = ticket.StatusId,
+                Description = ticket.Description,
+                CreatedBy = ticket.CreatedBy,
+                AssignedTo = ticket.AssignedTo,
+                EmployeeComments = ticket.EmployeeComments,
+                Success = true,
+                Message = "Data retrieved successfully"
+            };
+
+            return ticketDto;
+        }
+
         public async Task<IEnumerable<Tickets>> GetUnassignedIssues()
         {
             var unassignedIssues = await _context.Ticket
@@ -125,37 +119,14 @@ namespace TicketRaising.Services.Userservicesss
             return unassignedIssues;
 
         }
-        //public async Task<bool> AssignTicketToSelf(int ticketId, int employeeId)
-        //{
-        //    var ticket = await _context.Ticket.FindAsync(ticketId);
-        //    if (ticket == null)
-        //    {
-        //        return false; //Ticket Not Found
-        //    }
 
-        //    // check if ticket is unassigned
-        //    if(ticket.EmployeeId !=null)
-        //    {
-        //        return false; // Ticket is already assigned 
-        //    }
-
-        //    var employee = await _context.Employees.FindAsync(employeeId); //Find the employee by employeeId
-        //    if(employee == null)
-        //    {
-        //        return false; //Employee not found
-        //    }
-
-
-        //    // Assign the ticket to the employee
-        //    ticket.EmployeeId = employeeId;
-        //    ticket.AssignedTo = employee.Name;
-        //    ticket.Status = TicketStatus.Processing;
-        //    ticket.UpdatedOn = DateTime.Now;
-
-        //    await _context.SaveChangesAsync();
-        //    return true;
-
-        //}
+        public async Task<IEnumerable<Tickets>> GetAssignedIssues(int employeeId)
+        {
+            var assignedIssues = await _context.Ticket
+                .Where(ticket => ticket.EmployeeId == employeeId)
+                .ToListAsync();
+            return assignedIssues;
+        }
 
         public async Task<IEnumerable<Tickets>> GetOpenStatusTickets()
         {
@@ -165,28 +136,34 @@ namespace TicketRaising.Services.Userservicesss
             return openStatusTickets;
         }
 
-        public async Task<bool> ReassignTicket(int ticketId, int newEmployeeId)
+        public async Task<bool> ReassignAndChangeStatus(int ticketId, int newEmployeeId, TicketStatus newStatus, string employeeComment)
         {
             var ticket = await _context.Ticket.FindAsync(ticketId);
             if (ticket == null)
             {
                 return false; // Ticket Not Found
             }
-            // Check if new employee exist
 
+            // Check if new employee exists
             var newEmployee = await _context.Employees.FindAsync(newEmployeeId);
             if (newEmployee == null)
             {
                 return false; // New employee not found
             }
-            // Reassign the ticket to new employee
-            ticket.EmployeeId= newEmployeeId;
+
+            // Reassign the ticket to the new employee
+            ticket.EmployeeId = newEmployeeId;
             ticket.AssignedTo = newEmployee.Name;
-            ticket.UpdatedOn= DateTime.Now;
+            ticket.UpdatedOn = DateTime.Now;
+            ticket.StatusId = (int)newStatus;
+          
+            ticket.EmployeeComments = employeeComment;
+            ticket.UpdatedOn=DateTime.Now;
 
             await _context.SaveChangesAsync();
             return true;
         }
+
 
         public async Task<bool> MarkTicketAsResolved(int ticketId)
         {

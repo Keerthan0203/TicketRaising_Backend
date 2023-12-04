@@ -1,5 +1,6 @@
 #navbar{
     background-color: #E0B1CB;
+    width: 100%;
 }
 #logo img{
     border-radius: 10px;
@@ -8,6 +9,7 @@
 }
 .navbar-nav{
     margin-left: 50px;
+    width: 100%;
 }
 .nav-item .nav-link{
     color: #5E548E;
@@ -48,7 +50,7 @@
 
 
 
-.container {
+/* .container {
     text-align: center;
 }
 
@@ -67,32 +69,32 @@
 }
 
 /* your issue card */
-body {
+/* body {
     background: url('../images/Main\ page\ image.jpg') center center fixed; /* Replace 'your-image-path.jpg' with your actual image path */
-    background-size: cover;
+    /* background-size: cover; */ 
     /* /* height: 100vh; Ensure the background covers the whole viewport
     margin: 0; Remove default margin */
     /* overflow: hidden; */
-}
+/* } */
 
 /* .card{
     background-color: #b2744c !important;
 } */
-.card .card-body{
+/* .card .card-body{
     background-color: #E0B1CB;
     /* border: 1px solid white;
     border-radius: 5px; */
-    color: #5E548E;
-}
-.card-custom .card-body{
+    /* color: #5E548E; */
+/* } */ 
+/* .card-custom .card-body{
     padding-left: 40px;
 }
 .card-custom {
     max-width: 500px; /* Adjust the max-width as needed */
-    margin: 0 auto; /* Center the card */
-    height: 20vh;
+    /* margin: 0 auto; /* Center the card */
+    /* height: 20vh; */ 
    
-}
+/* } */
 /* .card-title-underline {
     text-decoration: underline;
     background-color: #5E548E;
@@ -100,7 +102,7 @@ body {
     border-radius: 5px;
     color: white;
 } */
-#addCommentBtn{
+/* #addCommentBtn{
     background-color: #7e679d;
     color: white;
     border: white;
@@ -113,5 +115,5 @@ body {
     display: flex; 
     justify-content: space-between;
 }
-
+ */
 

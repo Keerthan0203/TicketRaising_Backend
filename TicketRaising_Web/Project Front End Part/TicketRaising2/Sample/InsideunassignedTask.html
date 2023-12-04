@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Details</title>
+    <link rel="stylesheet" type="text/css" href="InsideunassignedTask.css">
+    
+    <script src="dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+</head>
+<body>
+    <div class="left-side">
+        <a href="dashboard.html">Go back</a>
+        <h1>Ticket Details</h1>
+        <section class="mainclass">
+            <div>
+                <form id="ticketForm">
+                    <label for="ticketID" class="ticketID">Ticket ID:</label>
+                    <input type="text" class="input-form" id="ticketID" name="ticketID" placeholder="" disabled>
+ 
+                    <label for="name" class="name">Name:</label>
+                    <input type="text" id="name" class="input-form" name="name" placeholder="" disabled>
+ 
+                    <label for="issue-type" class="issue-type">Issue Type:</label>
+                    <input type="text" id="issue-type" class="input-form" name="issue-type" placeholder="" disabled>
+ 
+                    <label for="priority" class="priority">Priority:</label>
+                    <input type="text" id="priority" class="input-form" name="priority" placeholder="" disabled>
+ 
+                    <label for="description" class="description">Description:</label>
+                    <textarea id="description" cols="20" rows="5" class="input-form" name="description" placeholder="" disabled></textarea>
+
+                    <label for="employeeComments" class="user-comments">Comments History:</label><br>
+                    <textarea id="employeeComments" cols="20" rows="5" name="userComments" placeholder="" disabled></textarea><br><br>
+ 
+                    <label for="comments" class="comments">Comments:</label>
+                    <textarea id="comment" cols="20" rows="5" class="input-form" name="comment" ></textarea>
+                </form>
+            </div>
+            <div class="right-side">
+               
+                <p><label class="status">Status:</label>
+                    <select id="status">
+                        <option value="1">Open</option>
+                        <option value="2">InProgress</option>
+                        <option value="3">Resolved</option>
+                        <option value="4">Closed</option>
+                    </select>
+                </p>
+                <p><label class="assigned-to">Assigned To:</label>
+                   
+                    <select id="assigned">
+                        <option value="1">Poojashri S</option>
+                        <option value="2">Meenakshi Sundaram</option>
+                        <option value="3">Christo Jestine</option>
+                        <option value="4">Vipinkumar Sivakumar</option>
+                    </select>
+                </p>
+                <button id="update-button "onclick=" postdata();">Update Ticket</button>
+            </div>
+        <!-- </form> -->
+        </section>
+   
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        loadingDataofuser();
+        // postdata();
+                });
+</script>
+</body>
+</html>

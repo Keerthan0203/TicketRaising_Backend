@@ -103,9 +103,47 @@ const SignUp = async () => {
     }
 
 };
-//axios end ...
-// login end
 
+const AdminLogin = async () => {
+    event.preventDefault();
+    debugger
+    const email = document.getElementById('adminEmail')?.value;
+    const password = document.getElementById('adminPassword')?.value;
+    const url = `${baseUrl}/User/EmployeeLogin`;
+
+    if (!email || !password) {
+        console.log("Please enter both email and password");
+        alert('Please enter both credentials');
+        return;
+    }
+
+    const payload = {
+        "email": email,
+        "password": password
+    };
+
+    try {
+        debugger
+        const response = await axios.post(url, payload);
+        console.log(response);
+
+        if (response.data && response.data.name) {
+            // Storing name in sessionStorage
+            sessionStorage.setItem('employeeId', response.data.id);
+            sessionStorage.setItem('employeeName', response.data.name);
+
+            window.location.href = "./Sample/dashboard.html";
+        } else {
+            console.log("Authentication failed");
+            //showing an error message
+            alert('Username or password is incorrect. Please check the credentials and re-try. ');
+
+        }
+    } catch (err) {
+        console.error(err);
+        // Handle errors here
+    }
+};
 
 
 // Script 
@@ -114,7 +152,7 @@ function redirectToSubmitTicketPage() {
 }
 
 function redirectToYourRequestPage() {
-    window.location.href = 'Your_Request.html';
+    window.location.href = 'UserRequest.html';
 }
 
 function redirectToHomePage() {
@@ -124,6 +162,7 @@ function getvalue() {
     const name = sessionStorage.getItem('userName');
     document.getElementById('subject').placeholder = name;
 }
+
 
 async function submission() {
     const issue = document.getElementById('issue-type').value;
@@ -148,45 +187,35 @@ async function getmyIssue(){
         const response = await axios.get(url);
         console.log("response.data", response.data);
         const responseData=response.data;
-        // console.log("responseData", responseData);
-        console.log("responsedata1",responseData[1]);
+        const tableBody = document.querySelector("#TicketHistory table tbody");
+        
         for(let i=0;i<responseData.length;i++){
             const ticket=responseData[i];
             console.log("CheckingIssues ", ticket);
-            // console.log("CheckingIssues",responseData);
-            var div = document.createElement('div');
-            var targetElement=document.getElementById('TicketHistory');
+            console.log("CheckingIssues",responseData);
+            // var div = document.createElement('div');
+            // var targetElement=document.getElementById('TicketHistory');
+           
+           // row.addEventListener("click", () => handleClickfortotaltask(ticket.id));
 
             // div.className = 'card card-custom';
             // var targetElement=document.getElementById("TicketHistory");
-            div.innerHTML=`
-            <div id="RequestFeedback">
-            <div class="card-body">
-                <div class="allign" >
-                    <h5 class="card-title card-title-underline ">Issue Raised :</h5>
-                    <p class="card-text">${responseData[i].ticketTypeId}</p>
-                </div>
-                <div class="allign">
-                    <h5 class="card-title-underline">Status :</h5>
-                    <p class="card-text">${responseData[i].statusId}</p>
-                </div>
-                <h5 class="allign">Comments :</h5>
-
-            <div id="comments-container">
-                <p id="commentCount" style="cursor: pointer; text-decoration: underline;">0 comments</p>
-                <div id="commentsSection" style="display: none;">
-                    <!-- Comments will be dynamically added here -->
-                </div>
-            </div>
-            <div class="manual-comment">
-                <label for="manualComment">Add Comment:</label>
-                <textarea id="manualComment" class="form-control" rows="3"></textarea>
-                <button id="addCommentBtn" class="btn btn-primary mt-2">Add Comment</button>
-            </div>
-            <hr>
-        </div>
-`;
-targetElement.appendChild(div);
+            const row = document.createElement('tr');
+           
+            row.innerHTML=`
+            
+                    <tr onclick="handleClick(${responseData[i].id})">
+                        <td class="login-anchor">${responseData[i].id}</td>
+                        <td>${responseData[i].createdBy}</td>
+                        <td>${responseData[i].description}</td>
+                        <td>${responseData[i].ticketTypeId}</td>
+                        <td>Low</td>
+                        <td>${responseData[i].assignedTo}</td>
+                        <td>${responseData[i].statusId}</td>
+                    </tr>
+                `;
+                row.addEventListener("click", () => handleClick(ticket.id));
+                tableBody.appendChild(row);
     }
 }
 catch(error){
@@ -194,6 +223,15 @@ catch(error){
     console.error("Error",error);
 }
 }
+async function handleClick(element){
+    console.log("chekcing value",element);
+    sessionStorage.setItem('Ticket_id',element);
+    window.location.href="InsideIssueRequest.html";
+
+}
+
+
+
 
 // Function to fetch user-specific tickets
 // async function fetchUserTickets(userId) {
@@ -214,37 +252,14 @@ catch(error){
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const commentsContainer = document.getElementById("comments-container");
-    const commentsSection = document.getElementById("commentsSection");
-    const manualCommentTextarea = document.getElementById("manualComment");
-    const addCommentBtn = document.getElementById("addCommentBtn");
-    const commentCount = document.getElementById("commentCount");
-
-    let comments = 0;
+   
     // Update the profile information with the stored name
     const storedName = sessionStorage.getItem('userName');
     if (storedName) {
         document.getElementById('username').textContent = storedName;
     }
-
-    addCommentBtn && addCommentBtn.addEventListener("click", function () {
-        const commentText = manualCommentTextarea.value.trim();
-
-        if (commentText !== "") {
-            const timestamp = new Date().toLocaleString();
-            const commentHtml = `
-                <div class="comment">
-                    <p><strong>User:</strong> ${commentText}</p>
-                    <p><small>${timestamp}</small></p>
-                </div>
-            `;
-
-            commentsSection.innerHTML += commentHtml;
-            manualCommentTextarea.value = ""; // Clear the textarea after adding a comment
-            comments += 1;
-            updateCommentCount();
-        }
     });
+  
 
     // Yourrrrrrrr Requestssssssssssss
     // document.addEventListener("DOMContentLoaded", async function () {
@@ -275,16 +290,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    commentCount && commentCount.addEventListener("click", function () {
-        // Toggle the visibility of the comments section
-        commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
-    });
+    // commentCount && commentCount.addEventListener("click", function () {
+    //     // Toggle the visibility of the comments section
+    //     commentsSection.style.display = commentsSection.style.display === "none" ? "block" : "none";
+    // });
 
-    function updateCommentCount() {
-        commentCount.textContent = comments === 1 ? "1 comment" : `${comments} comments`;
-        commentsSection.innerHTML = comments > 0 ? commentsSection.innerHTML : "0 comments";
-    }
-});
+    // function updateCommentCount() {
+    //     commentCount.textContent = comments === 1 ? "1 comment" : `${comments} comments`;
+    //     commentsSection.innerHTML = comments > 0 ? commentsSection.innerHTML : "0 comments";
+    // }
+// });
+
+
 function redirectToHomePage() {
     window.location.href = 'HomePage.html';
 }
@@ -296,4 +313,42 @@ async function Logout() {
     window.location.href = "Login_signup.html"
 }
 
+
+// Inside Issue Request
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     // Get the ticket ID from the URL parameters
+        //     const urlParams = new URLSearchParams(window.location.search);
+        //     const ticketId = urlParams.get('id');
+
+        //     // Fetch ticket details using the ticket ID
+        //     // Replace this with your actual API endpoint for fetching ticket details
+        //     fetchTicketDetails(ticketId);
+        // });
+
+        // // Function to fetch ticket details and fill the form
+        // function fetchTicketDetails(ticketId) {
+        //     // Replace this URL with your actual API endpoint for fetching ticket details
+        //     const apiUrl = `${baseUrl}/Ticket/getTicketById/{ticketId}`;
+
+        //     fetch(apiUrl)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             // Fill the form with the retrieved ticket details using innerHTML
+        //             document.getElementById('ticketID').value = data.id;
+        //             document.getElementById('name').value = data.createdBy;
+        //             document.getElementById('issueType').value = data.ticketTypeId;
+        //             document.getElementById('priority').value = 'Low'; // You can set priority based on your logic
+        //             document.getElementById('description').innerHTML = data.description;
+        //         })
+        //         .catch(error => {
+        //             console.error("Error fetching ticket details", error);
+        //         });
+        // }
+
+     
+    
+        // document.getElementById('assignedTasksButton').addEventListener('click', function() {
+        //     window.alocation.href = 'assignedTasks.html';
+        // });
 

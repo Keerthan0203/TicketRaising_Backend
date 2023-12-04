@@ -9,14 +9,15 @@
     font-family: "Poppins", sans-serif;
 }
 
-body{
+/* body{
     display: flex;
-}
+} */
 .container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: nowrap;
+    width: 100%;
 }
 .card--container{
     display: flex;
@@ -44,6 +45,9 @@ body{
     color: rgba(113, 99, 186, 255);
     /* padding-bottom: 110px; */
     font-size: 35px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
 }
 
 .task--board{
@@ -116,6 +120,7 @@ body{
 table{
     width: 100%;
     border-collapse: collapse;
+    border-radius: 2%;
 }
 
 thead{
@@ -125,7 +130,7 @@ thead{
 
 th{
     padding: 15px;
-    text-align: left;
+    text-align: center;
 }
 
 tbody{
@@ -136,10 +141,14 @@ td{
     padding: 15px;
     font-size: 14px;
     color: #333;
+    border: 1px solid #dddddd;
+    text-align: center;
+    display:inline-flexbox;
 }
 
 tr:nth-child(even){
     background: #fff;
+    
 }
 
 /* tfoot{
@@ -151,3 +160,40 @@ tr:nth-child(even){
 tfoot td{
     padding: 15px;
 } */
+/* #TicketHistory th, #TicketHistory td {
+    border: 20px solid #dddddd;
+    padding: 200    px;
+    text-align: center;
+   
+} */
+/* #TotalTask table {
+    width: 100%;
+    border-collapse: collapse;
+} */
+
+#TotalTask th,
+#TotalTask td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}
+
+/* #TotalTask th {
+    background-color: #6786C1;
+    color: white;
+}
+
+#TotalTask tbody {
+    background-color: #f2f2f2;
+} */
+
+/* #TotalTask tr:nth-child(even) {
+    background-color: #ffffff;
+} */
+/* .container {
+    max-width: 1435px;
+} */
+.navbar {
+    max-width: 100%; /* Adjust as needed */
+ /* Center the navbar within the container */
+}

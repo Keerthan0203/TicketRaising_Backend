@@ -1,27 +1,27 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//     const commentsContainer = document.getElementById("comments-container");
-//     const manualCommentTextarea = document.getElementById("manualComment");
-//     const addCommentBtn = document.getElementById("addCommentBtn");
+document.addEventListener("DOMContentLoaded", function () {
+    const commentsContainer = document.getElementById("comments-container");
+    const manualCommentTextarea = document.getElementById("manualComment");
+    const addCommentBtn = document.getElementById("addCommentBtn");
 
-//     addCommentBtn.addEventListener("click", function () {
-//         const commentText = manualCommentTextarea.value.trim();
+    addCommentBtn.addEventListener("click", function () {
+        const commentText = manualCommentTextarea.value.trim();
 
-//         if (commentText !== "") {
-//             const timestamp = new Date().toLocaleString();
-//             const commentHtml = `
-//                 <div class="comment">
-//                     <p><strong>User:</strong> ${commentText} &nbsp; <small>${timestamp}</small></p>
+        if (commentText !== "") {
+            const timestamp = new Date().toLocaleString();
+            const commentHtml = `
+                <div class="comment">
+                    <p><strong>User:</strong> ${commentText} &nbsp; <small>${timestamp}</small></p>
                     
-//                 </div>
-//             `;
+                </div>
+            `;
 
-//             commentsContainer.innerHTML += commentHtml;
-//             manualCommentTextarea.value = ""; // Clear the textarea after adding a comment
-//         }
-//     });
-// });
+            commentsContainer.innerHTML += commentHtml;
+            manualCommentTextarea.value = ""; // Clear the textarea after adding a comment
+        }
+    });
+});
 
-// {/* <p><small>${timestamp}</small></p> */}
+{/* <p><small>${timestamp}</small></p> */}
 
 document.addEventListener("DOMContentLoaded", function () {
     const commentsContainer = document.getElementById("comments-container");

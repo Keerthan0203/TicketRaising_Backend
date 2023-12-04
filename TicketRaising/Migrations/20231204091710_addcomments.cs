@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TicketRaising.Migrations
 {
-    public partial class migrateerGFDFGHJndfn : Migration
+    public partial class addcomments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,13 +74,14 @@ namespace TicketRaising.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
                     TicketTypeId = table.Column<int>(type: "int", nullable: false),
-                    typesId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserComments = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeComments = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,8 +98,8 @@ namespace TicketRaising.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ticket_TypesofTickets_typesId",
-                        column: x => x.typesId,
+                        name: "FK_Ticket_TypesofTickets_TicketTypeId",
+                        column: x => x.TicketTypeId,
                         principalTable: "TypesofTickets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -111,24 +112,61 @@ namespace TicketRaising.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
+                name: "EmployeeComments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
                     TicketId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Direction = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    createdBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Ticket_TicketId",
+                        name: "FK_EmployeeComments_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeComments_Ticket_TicketId",
                         column: x => x.TicketId,
                         principalTable: "Ticket",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserComments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    TicketId = table.Column<int>(type: "int", nullable: false),
+                    createdBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserComments_Ticket_TicketId",
+                        column: x => x.TicketId,
+                        principalTable: "Ticket",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserComments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -154,8 +192,13 @@ namespace TicketRaising.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_TicketId",
-                table: "Comments",
+                name: "IX_EmployeeComments_EmployeeId",
+                table: "EmployeeComments",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeComments_TicketId",
+                table: "EmployeeComments",
                 column: "TicketId");
 
             migrationBuilder.CreateIndex(
@@ -169,20 +212,33 @@ namespace TicketRaising.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ticket_typesId",
+                name: "IX_Ticket_TicketTypeId",
                 table: "Ticket",
-                column: "typesId");
+                column: "TicketTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ticket_UserId",
                 table: "Ticket",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserComments_TicketId",
+                table: "UserComments",
+                column: "TicketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserComments_UserId",
+                table: "UserComments",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "EmployeeComments");
+
+            migrationBuilder.DropTable(
+                name: "UserComments");
 
             migrationBuilder.DropTable(
                 name: "Ticket");

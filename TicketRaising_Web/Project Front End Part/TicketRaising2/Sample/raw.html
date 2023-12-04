@@ -1,67 +1,11 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Ticket Management</title>
-  <link rel="stylesheet" href="./raw.css">
-</head>
-<body>
-    <div class="container">
-        <div class="left-side">
-            <h2>Ticket Details</h2>
-            <form id="ticketForm">
-                <label for="ticketID">Ticket ID</label>
-                <input type="text" id="ticketID" name="ticketID" required><br><br>
-        
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required><br><br>
-        
-                <label for="description">Description</label><br>
-                <textarea id="description" name="description" required></textarea><br><br>
-        
-                <label for="userComments">User Comments</label><br>
-                <textarea id="userComments" name="userComments" required></textarea><br><br>
-        
-                <label for="comments">Comments</label><br>
-                <textarea id="comments" name="comments"></textarea><br><br>
-            </form>
-        </div>
-        <div class="right-side">
-            <h2>Actions</h2>
-            <div>
-                <label for="status">Status</label>
-                <select id="status" name="status">
-                    Options for status
-                    <option value="open">Open</option>
-                    <option value="inProgress">In Progress</option>
-                    <option value="resolved">Resolved</option>
-                    <option value="closed">Closed</option>
-                </select>
-            </div><br>
-            <div>
-                <label for="assigned">Assigned To</label>
-                <select id="assigned" name="assigned">
-                    Options for assigned
-                    <option value="user1">Poojashri S</option>
-                    <option value="user2">Meenakshi Sundaram</option>
-                    <option value="user3">Christo Jestine</option>
-                    <option value="user4">Vipinkumar Sivakumar</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    </div>
-        <button class="update-button">Update</button>
-    </div>
-</body>
-</html> -->
+
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Ticket Page</title>
-    <style>
-/* New styles for layout positioning */
+    
+<!-- /* New styles for layout positioning */
         body{
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(image.jpg);
         }
@@ -204,7 +148,7 @@
         #priority{
             font-size: 25px;
             margin-left: 105px;
-        }
+        } -->
     </style>
 </head>
 <body>
@@ -214,19 +158,19 @@
         <!-- <div class="form-container"> -->
         <form id="ticketForm">
             <label for="ticketID" class="ticketID">Ticket ID:</label>
-            <input type="text" id="ticketID" name="ticketID" required><br><br>
+            <input type="text" id="ticketID" name="ticketID" placeholder="" disabled><br><br>
     
             <label for="name" class="name">Name:</label>
-            <input type="text" id="name" name="name" required><br><br>
+            <input type="text" id="name" name="name" placeholder="" disabled><br><br>
 
             <label for="name" class="issue-type">Issue Type:</label>
-            <input type="text" id="issue-type" name="issueType" required><br><br>
+            <input type="text" id="issue-type" name="issueType" placeholder="" disabled><br><br>
 
             <label for="name" class="priority">Priority:</label>
-            <input type="text" id="priority" name="priority" required><br><br>
+            <input type="text" id="priority" name="priority" placeholder="" disabled><br><br>
     
             <label for="description" class="description">Description:</label><br>
-            <textarea id="description" cols="50" rows="10" name="description" required></textarea><br><br>
+            <textarea id="description" cols="50" rows="10" name="description" placeholder="" disabled></textarea><br><br>
     
             <label for="userComments" class="user-comments">User Comments:</label><br>
             <textarea id="userComments" cols="50" rows="10" name="userComments" required></textarea><br><br>
@@ -250,9 +194,10 @@
             <option value="user3">Christo Jestine</option>
             <option value="user4">Vipinkumar Sivakumar</option>
         </select></p>
+        <button id="update-button">Update Ticket</button>
     </div>
     <div>
-        <button id="update-button">Update Ticket</button>
+        
     </div>
 </div>
 <script>
@@ -279,6 +224,9 @@
   userCommentsTextarea.value = bulletList;
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    loadingDataofuser();
+            });
 </script>
 </body>
 </html>

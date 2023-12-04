@@ -46,12 +46,32 @@ namespace TicketRaising.Controllers
             return Ok(userTickets);
         }
 
+        [HttpGet("getTicketById/{ticketId}")]
+        public async Task<IActionResult> GetAllTicketsByTicketId(int ticketId)
+        {
+            var ticket = await _ticketService.GetAllTicketsByTicketId(ticketId);
+
+            if (ticket == null)
+            {
+                return NotFound("Ticket not found");
+            }
+
+            return Ok(ticket);
+        }
+
         [HttpGet("getunassignedIssues")]
 
         public async Task<IActionResult> GetUnassignedIssues()
         {
             var unassignedIssues = await _ticketService.GetUnassignedIssues();
             return Ok(unassignedIssues);
+        }
+
+        [HttpGet("getAssignedIssues")]
+        public async Task<IActionResult> GetAssignedIssues(int employeeId)
+        {
+            var assignedIssues = await _ticketService.GetAssignedIssues(employeeId);
+            return Ok(assignedIssues);
         }
 
         [HttpGet("GetOpenStatusTickets")]
@@ -62,11 +82,10 @@ namespace TicketRaising.Controllers
             return Ok(openStatusTickets);
         }
 
-
-        [HttpPost("Assign_the_Issue")]
-        public async Task<IActionResult> ReassignTicket(int ticketId, int newEmployeeId)
+        [HttpPost("Assign_the_Issue_and_Change_status")]
+        public async Task<IActionResult> ReassignAndChangeStatus(int ticketId, int newEmployeeId, TicketStatus newStatus, string employeeComment)
         {
-            var success = await _ticketService.ReassignTicket(ticketId, newEmployeeId);
+            var success = await _ticketService.ReassignAndChangeStatus(ticketId, newEmployeeId, newStatus, employeeComment);
             if (success)
             {
                 return Ok("Ticket assigned successfully");
@@ -88,7 +107,7 @@ namespace TicketRaising.Controllers
         [HttpPut("ResolveAndCloseTicket/{ticketId}")]
         public async Task<IActionResult> ResolveAndCloseTicket(int ticketId, string resolutionDetails)
         {
-            var success = await _ticketService.ResolveAndCloseTicket(ticketId, resolutionDetails); 
+            var success = await _ticketService.ResolveAndCloseTicket(ticketId, resolutionDetails);
             if (success)
             {
                 return Ok("Ticket resolved and closed successfully ");

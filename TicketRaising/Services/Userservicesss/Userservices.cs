@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BCrypt.Net;
+﻿
 using TicketRaising.Dto;
-using TicketRaising.Models;
+
 
 namespace TicketRaising.Services.Userservicesss
 {
@@ -39,8 +38,6 @@ namespace TicketRaising.Services.Userservicesss
             };
         }
 
-    
-
         public async Task<EmployeeDetailsDto> EmpLogin(Login emplogin)
         {
             var employeelogin = await _context.Employees.FirstOrDefaultAsync(p => p.Email == emplogin.email);
@@ -63,9 +60,6 @@ namespace TicketRaising.Services.Userservicesss
                 Name = employeelogin.Name,
                 Email = employeelogin.Email
             };
-
-
-
         }
 
         public async Task<bool> Register(UserRegisterRequest request)
@@ -90,13 +84,12 @@ namespace TicketRaising.Services.Userservicesss
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return true;
-
         }
 
         public async Task<bool> EmpRegister(EmployeeRegisterRequest emprequest)
         {
             var empname = emprequest.Name;
-            if (_context.Users.Any(e => e.Email == emprequest.Email)) // Here We are checking whether the Employee already exists or not. If exists then we dont want to register again.
+            if (_context.Employees.Any(e => e.Email == emprequest.Email)) // Here We are checking whether the Employee already exists or not. If exists then we dont want to register again.
             {
                 return false;
             }

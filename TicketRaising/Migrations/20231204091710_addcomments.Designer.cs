@@ -12,8 +12,8 @@ using TicketRaising.Data;
 namespace TicketRaising.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231127201107_migrateerGFDFGHJndfn")]
-    partial class migrateerGFDFGHJndfn
+    [Migration("20231204091710_addcomments")]
+    partial class addcomments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,32 +23,6 @@ namespace TicketRaising.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("TicketRaising.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Direction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("Comments");
-                });
 
             modelBuilder.Entity("TicketRaising.Models.Employee", b =>
                 {
@@ -73,6 +47,40 @@ namespace TicketRaising.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("TicketRaising.Models.EmployeeComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("EmployeeComments");
                 });
 
             modelBuilder.Entity("TicketRaising.Models.Status", b =>
@@ -134,6 +142,9 @@ namespace TicketRaising.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EmployeeComments")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
@@ -146,10 +157,10 @@ namespace TicketRaising.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserComments")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("typesId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -158,9 +169,9 @@ namespace TicketRaising.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TicketTypeId");
 
-                    b.HasIndex("typesId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
                 });
@@ -228,13 +239,55 @@ namespace TicketRaising.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TicketRaising.Models.Comment", b =>
+            modelBuilder.Entity("TicketRaising.Models.UserComment", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("createdBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserComments");
+                });
+
+            modelBuilder.Entity("TicketRaising.Models.EmployeeComment", b =>
+                {
+                    b.HasOne("TicketRaising.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TicketRaising.Models.Tickets", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Employee");
 
                     b.Navigation("Ticket");
                 });
@@ -251,25 +304,44 @@ namespace TicketRaising.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TicketRaising.Models.Types", "Types")
+                        .WithMany()
+                        .HasForeignKey("TicketTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TicketRaising.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TicketRaising.Models.Types", "types")
-                        .WithMany()
-                        .HasForeignKey("typesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Employee");
+
+                    b.Navigation("Types");
 
                     b.Navigation("User");
 
                     b.Navigation("status");
+                });
 
-                    b.Navigation("types");
+            modelBuilder.Entity("TicketRaising.Models.UserComment", b =>
+                {
+                    b.HasOne("TicketRaising.Models.Tickets", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TicketRaising.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Ticket");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

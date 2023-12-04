@@ -45,11 +45,10 @@ namespace TicketRaising.Controllers
         {
             var users = await _userservices.GetAllUsers(); // getting all users details
 
-            //if (users == null )
-            //{
-            //    return NotFound("No users found");
-            //}
-
+            if (users == null)
+            {
+                return NotFound("No users found");
+            }
             return Ok(users);
         }
     }

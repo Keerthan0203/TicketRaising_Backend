@@ -1,0 +1,23 @@
+.card-body {
+    background-color:aliceblue; /* White background for the card */
+    border: 1px solid #dfe6de; /* Add a border for separation */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+
+}
+.card-title {
+    font-size: 24px; /* Increase the font size for the card title */
+    margin-bottom: 10px; /* Add some space below the title */
+}
+
+.card-subtitle {
+    font-size: 18px; /* Increase the font size for subtitles */
+    margin-bottom: 5px; /* Add some space below each subtitle */
+}
+
+
+
+.patientProfilecard {
+    border-top: 2px solid #007bff; /* Blue border line at the top of the card */
+    margin-top: 10px; /* Add some space above the border line */
+}

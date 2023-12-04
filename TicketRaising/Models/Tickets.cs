@@ -29,7 +29,8 @@ namespace TicketRaising.Models
         public string? AssignedTo { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime UpdatedOn { get; set; }
-      
+        public string? EmployeeComments { get; set; }
+
 
     }
 

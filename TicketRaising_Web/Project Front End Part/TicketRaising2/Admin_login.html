@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <link rel="stylesheet" href="Login_signup.css">
+    <link rel="stylesheet" href="./Css/Login_signup.css">
+    <script src="script.js"></script>
+    <script async="true" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
     <div class="hero">
         <div class="form-box">
-            <div class="button-box">
-                <div id="btn"></div>
-                <button type="button" class="toggle-button" onclick="login()">Login</button>
+            <div class="button-login">
+                <div id="login-btn"></div>
+                <button type="button" class="toggle-login" onclick="login()">Admin Login</button>
             </div>
-            <form id="login" class="input-group">
-                <input type="email" class="input-field" placeholder="Email" required>
-                <input type="text" class="input-field" placeholder="Password" required>
-                <input type="checkbox" class="check-box"><span>Remember Password</span>
-                <button type="submit" class="submit-btn">Login</button>
+            <form id="login" class="input-admin">
+                <input type="email" class="input-field" placeholder="Email" required id="adminEmail">
+                <input type="password" class="input-field" placeholder="Password" required id="adminPassword">
+                <button type="button" class="submit-admin" onclick="AdminLogin()">Login</button><br>
+                <a href="Login_signup.html">User Login</a>
             </form>
         </div>
     </div>

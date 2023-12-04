@@ -1,0 +1,95 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(./images/login\ background.jpg);
+    font-size: 18px; /* Increase default font size */
+    text-align: center; /* Center align content */
+}
+ 
+.left-side {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #e0b1cb;
+    font-size: 24px; /* Increase font size for left side */
+    display: inline-block; /* Display as inline block */
+    text-align: left; /* Align text to the left */
+    margin: 20px auto; /* Center horizontally */
+    width: 60%;
+   
+}
+ 
+/* Adjusted styles for update button */
+#update-button {
+    padding: 10px 20px;
+    background-color: #be95c4;
+    color: beige;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+    transition: background-color 0.3s;
+    display: inline;
+    margin: 20px auto; /* Center horizontally */
+}
+ 
+#update-button:hover{
+    background-color: blue;
+}
+ 
+/* Updated label styles */
+label {
+    display: block;
+    margin-bottom: 10px; /* Increase space between labels */
+    font-size: 20px; /* Increase label font size */
+}
+ 
+/* Updated input and textarea styles */
+input[type="text"],
+textarea {
+    font-size: 20px; /* Increase input and textarea font size */
+    padding: 5px;
+    margin-bottom: 10px; /* Increase space between inputs */
+   
+}
+h1{
+    display: flex;
+    justify-content: center ;
+}
+ 
+ 
+#ticketForm, .right-side {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px; /* Adjust this width as needed */
+    margin: 0 auto; /* Center the form */
+}
+ 
+ 
+label {
+    flex: 1;
+}
+ 
+.input-form {
+    flex: 2;
+    margin-left: 10px; /* Add spacing between label and input */
+}
+.mainclass{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+ 
+#status, #assigned{
+    font-size: 20px;
+}
+ 
+#comments{
+    border-radius:20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#userComments, #description{
+    border-radius:20px;
+}
+
+#ticketID, #name, #issue-type, #priority{
+    border-radius: 5px;
+}

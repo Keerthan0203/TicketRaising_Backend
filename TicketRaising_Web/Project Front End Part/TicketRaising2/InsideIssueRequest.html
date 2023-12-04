@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ticket Page</title>
+   
+    <link rel="stylesheet" type="text/css" href="InsideIssueRequest.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="InsideIssueRequest.js"></script>
+      <!-- Bootstrap links -->
+     
+</head>
+
+<body>
+
+        <div class="left-side">
+
+            <a href="UserRequest.html">Go Back</a>
+            <h1>Ticket Information</h1>
+            <form id="ticketForm">
+              
+                <label for="ticketID" class="ticketID">Ticket ID:</label>
+                <input type="text" class="input-form" id="ticketID" name="ticketID" placeholder="" disabled>
+
+                <label for="name" class="name">Name:</label>
+                <input type="text" id="name" class="input-form" name="name" placeholder="" disabled>
+
+                <label for="issue-type" class="issue-type">Issue Type:</label>
+                <input type="text" id="issueType" class="input-form" name="issueType" placeholder="" disabled>
+
+                <label for="priority" class="priority">Priority:</label>
+                <input type="text" id="priority" class="input-form" name="priority" placeholder="" disabled>
+
+                <label for="description" class="description">Description:</label>
+                <textarea id="description" cols="35" rows="5" class="input-form" name="description"
+                placeholder="" disabled></textarea>
+
+                <label for="commentsHistory" class="comments">Admin Comments:</label>
+                <textarea id="commentsHistory" cols="35" rows="5" class="input-form" name="commentsHistory" placeholder="" disabled ></textarea>
+
+
+                <!-- <label for="comments" class="comments">Comments:</label>
+                <textarea id="comments" cols="35" rows="5" class="input-form" name="comments"></textarea>
+
+                <button id="update-button">Update Ticket</button> -->
+            </form>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                loadingData123();
+            });
+        </script>
+   
+</body>
+
+</html>

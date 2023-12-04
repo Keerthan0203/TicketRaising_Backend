@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Requests</title>
     <link rel="stylesheet" href="./Css/Your_Request.css">
+    <link rel="stylesheet" href="./Sample/dashboard.css">
     <script src="script.js"></script>
-    <script src="Your_Request.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
@@ -65,25 +65,41 @@
             </div>
         </nav>
 
-        <!-- Dashboard section -->
-        <div class="container mt-4">
-            <h2>Your Requests</h2><br>
 
-            <!-- card container -->
-            <div class="card-custom">
-                <div class="card" id="TicketHistory">
-            </div>
-        </div>
+        <!-- navbar ends -->
+       <!-- <div class="container"> -->
 
+            <section>
+                <div class="tabular--wrapper">
+                    <h3 class="main--title">Your Requests</h3>
+                    <div class="table-container" id="TicketHistory">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Issue Type</th>
+                                <th>Priority</th>
+                                <th>Assigned To</th>
+                                <th>Status</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
 
-
+                        </tbody>
+                        
+                        </table>
+                    </div>
+                </div>
+            </section>
+        
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+         document.addEventListener("DOMContentLoaded", function () {
             getmyIssue();
-            // hello();
+        //     // hello();
         });
     </script>
 </body>
-
-</html>
