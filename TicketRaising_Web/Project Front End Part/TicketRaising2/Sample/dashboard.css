@@ -162,3 +162,15 @@ tr:nth-child(even) {
 .navbar {
     max-width: 100%;
 }
+#Assigned th,
+#Assigned td{
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}
+#Unassigned th,
+#Unassigned td{
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}
