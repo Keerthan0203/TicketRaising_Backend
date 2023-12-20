@@ -1,11 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Sockets;
-using TicketRaising.Dto;
-using TicketRaising.Models;
-using Microsoft.EntityFrameworkCore;
-
-
+﻿using TicketRaising.Dto;
 
 namespace TicketRaising.Services.Userservicesss
 {
@@ -165,10 +158,12 @@ namespace TicketRaising.Services.Userservicesss
         }
 
 
+
+
         public async Task<bool> MarkTicketAsResolved(int ticketId)
         {
             var ticket = await _context.Ticket.FindAsync(ticketId);
-            if(ticket == null)
+            if (ticket == null)
             {
                 return false; // Ticket not found
             }
@@ -183,7 +178,7 @@ namespace TicketRaising.Services.Userservicesss
         public async Task<bool> ResolveAndCloseTicket(int ticketId, string resolutionDetails)
         {
             var ticket = await _context.Ticket.FindAsync(ticketId);
-            if(ticket == null || ticket.StatusId != (int)TicketStatus.Query_Resolved )
+            if (ticket == null || ticket.StatusId != (int)TicketStatus.Query_Resolved)
             {
                 return false; //  Ticket not found or not in the resolved state
             }

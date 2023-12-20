@@ -174,3 +174,9 @@ tr:nth-child(even) {
     padding: 8px;
     text-align: center;
 }
+#TicketHistory th,
+#TicketHistory td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}

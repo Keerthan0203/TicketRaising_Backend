@@ -28,7 +28,6 @@ async function getUnassignedIssue() {
                 <td>${ticket.createdBy}</td>
                 <td>${ticket.description}</td>
                 <td>${ticket.ticketTypeId}</td>
-                <td>Low</td>
                 <td>${ticket.assignedTo}</td>
                 <td>${ticket.statusId}</td>
                 </tr>
@@ -115,7 +114,6 @@ async function getTotalIssue() {
                 <td>${ticket.createdBy}</td>
                 <td>${ticket.description}</td>
                 <td>${ticket.ticketTypeId}</td>
-                <td>Low</td>
                 <td>${ticket.assignedTo}</td>
                 <td>${ticket.statusId}</td>
                 </tr>
@@ -158,7 +156,6 @@ async function getAssignedIssue() {
                 <td>${ticket.createdBy}</td>
                 <td>${ticket.description}</td>
                 <td>${ticket.ticketTypeId}</td>
-                <td>Low</td>
                 <td>${ticket.assignedTo}</td>
                 <td>${ticket.statusId}</td>
                 </tr>

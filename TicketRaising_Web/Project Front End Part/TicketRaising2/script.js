@@ -192,7 +192,6 @@ async function getmyIssue(){
                         <td>${responseData[i].createdBy}</td>
                         <td>${responseData[i].description}</td>
                         <td>${responseData[i].ticketTypeId}</td>
-                        <td>Low</td>
                         <td>${responseData[i].assignedTo}</td>
                         <td>${responseData[i].statusId}</td>
                     </tr>
